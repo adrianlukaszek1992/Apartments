@@ -17,7 +17,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     AppComponent,
     AsyncObservablePipeComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
