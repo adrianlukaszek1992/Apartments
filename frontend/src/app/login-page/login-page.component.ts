@@ -32,6 +32,7 @@ export class LoginPageComponent implements OnInit {
         if (res.token) {
           this.customerService.setToken(res.token);
           this.router.navigateByUrl('/dashboard');
+          window.location.reload();
         }
       },
       res => {

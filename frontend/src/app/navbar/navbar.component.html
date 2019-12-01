@@ -2,9 +2,10 @@
 <html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
 <div class="line">
   <nav class="container">
-    <a type="button"  routerLink="home">Wyszukiwarka apartamentów</a>
-    <a type="button"  routerLink="home">Zarejestruj się</a>
-    <a type="button"  routerLink="login">Zaloguj  się</a>
     <a type="button"  routerLink="home">Strona Startowa</a>
+    <a type="button"  routerLink="home">Wyszukiwarka apartamentów</a>
+    <a type="button" *ngIf="!isLogged" routerLink="register">Zarejestruj się</a>
+    <a type="button" *ngIf="!isLogged"  routerLink="login">Zaloguj  się</a>
+    <a type="button" *ngIf="isLogged" (click)="logout()" routerLink="home">Logout</a>
   </nav>
 </div>

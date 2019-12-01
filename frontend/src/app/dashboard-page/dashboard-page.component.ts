@@ -11,16 +11,10 @@ import { Router } from '@angular/router';
 export class DashboardPageComponent implements OnInit {
 
   constructor(
-    private customerService: CustomerService,
-    private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
   }
-
- logout() {
-   this.customerService.clearToken(environment.token);
-   this.router.navigateByUrl('/login');
- }
 
 }
