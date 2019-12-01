@@ -4,15 +4,18 @@ import { CustomerService } from '../customer.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  selector: 'app-register-page',
+  templateUrl: './register-page.component.html',
+  styleUrls: ['./register-page.component.scss']
 })
-export class LoginPageComponent implements OnInit {
+export class RegisterPageComponent implements OnInit {
 
   email = 'test@test.com';
-  password = 'test@123';
+  password: string;
+  passwordRepeated: string;
+  isPwdMatch: boolean;
   error: any;
+  blurPwd: boolean;
 
   constructor(
     private apiService: ApiService,
@@ -26,12 +29,19 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-   tryLogin() {
-    this.apiService.login(
+  isPasswordMatch() {
+    this.password === this.passwordRepeated
+      ? this.isPwdMatch = true
+      : this.isPwdMatch = false;
+    this.blurPwd = true;
+  }
+
+   tryRegister() {
+     this.apiService.register(
       this.email,
       this.password
     ).subscribe(
-      res => {
+       res => {
         if (res.token) {
           this.customerService.setToken(res.token);
           window.location.reload();
@@ -43,3 +53,5 @@ export class LoginPageComponent implements OnInit {
         console.log(res.error.error);
       });
   }}
+
+

@@ -17,4 +17,11 @@ export class ApiService {
     });
   }
 
+  register(email: string, password: string): Observable<LoginResultModel> {
+    return this.http.post<LoginResultModel>('https://reqres.in/api/register', {
+      email: email,
+      password: password
+    });
+  }
+
 }
