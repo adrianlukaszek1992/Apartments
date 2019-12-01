@@ -6,21 +6,15 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
-  styleUrls: ['./dashboard-page.component.css']
+  styleUrls: ['./dashboard-page.component.scss']
 })
 export class DashboardPageComponent implements OnInit {
 
   constructor(
-    private customerService: CustomerService,
-    private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
   }
-
- logout() {
-   this.customerService.clearToken(environment.token);
-   this.router.navigateByUrl('/login');
- }
 
 }

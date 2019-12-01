@@ -11,13 +11,15 @@ import { AuthGuard } from './auth.guard';
 import { AsyncObservablePipeComponent } from './async-observable-pipe/async-observable-pipe.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { RegisterPageComponent } from './register-page/register-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AsyncObservablePipeComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    RegisterPageComponent,
   ],
   imports: [
     BrowserModule,

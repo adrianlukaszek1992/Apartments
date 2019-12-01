@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css']
+  styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
 
@@ -32,6 +32,7 @@ export class LoginPageComponent implements OnInit {
         if (res.token) {
           this.customerService.setToken(res.token);
           this.router.navigateByUrl('/dashboard');
+          window.location.reload();
         }
       },
       res => {
