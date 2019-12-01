@@ -21,9 +21,12 @@ export class LoginPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.customerService.isLogged()) {
+      this.router.navigateByUrl('/dashboard');
+    }
   }
 
-  tryLogin() {
+   tryLogin() {
     this.apiService.login(
       this.email,
       this.password
@@ -31,14 +34,12 @@ export class LoginPageComponent implements OnInit {
       res => {
         if (res.token) {
           this.customerService.setToken(res.token);
-          this.router.navigateByUrl('/dashboard');
           window.location.reload();
+          this.router.navigateByUrl('/dashboard');
         }
       },
       res => {
         this.error = res.error.error;
         console.log(res.error.error);
       });
-  }
-
-}
+  }}

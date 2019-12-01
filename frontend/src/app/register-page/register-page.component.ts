@@ -11,8 +11,11 @@ import { Router } from '@angular/router';
 export class RegisterPageComponent implements OnInit {
 
   email = 'test@test.com';
-  password = 'test@123';
+  password: string;
+  passwordRepeated: string;
+  isPwdMatch: boolean;
   error: any;
+  blurPwd: boolean;
 
   constructor(
     private apiService: ApiService,
@@ -21,24 +24,34 @@ export class RegisterPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.customerService.isLogged()) {
+      this.router.navigateByUrl('/dashboard');
+    }
   }
 
-  tryRegister() {
-    this.apiService.register(
+  isPasswordMatch() {
+    this.password === this.passwordRepeated
+      ? this.isPwdMatch = true
+      : this.isPwdMatch = false;
+    this.blurPwd = true;
+  }
+
+   tryRegister() {
+     this.apiService.register(
       this.email,
       this.password
     ).subscribe(
-      res => {
+       res => {
         if (res.token) {
           this.customerService.setToken(res.token);
-          this.router.navigateByUrl('/dashboard');
           window.location.reload();
+          this.router.navigateByUrl('/dashboard');
         }
       },
       res => {
         this.error = res.error.error;
         console.log(res.error.error);
       });
-  }
+  }}
 
-}
+

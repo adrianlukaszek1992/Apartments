@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
 private isLogged: boolean;
 
   constructor(private customerService: CustomerService) {
-    this.isLogged = customerService.isLogged();
+    this.isLogged = this.customerService.isLogged();
   }
 
   ngOnInit() {
