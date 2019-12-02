@@ -3,6 +3,7 @@ import { ApiService } from '../api.service';
 import { CustomerService } from '../customer.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {MustMatch} from '../utils/must-match.validator';
 // import { MustMatch } from './_helpers/must-match.validator';
 
 @Component({
@@ -32,7 +33,7 @@ export class RegisterPageComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
     }, {
-     // validator: MustMatch('password', 'confirmPassword')
+      validator: MustMatch('password', 'confirmPassword')
     });
   }
 
