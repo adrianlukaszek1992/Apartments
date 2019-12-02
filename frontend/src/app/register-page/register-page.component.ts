@@ -4,7 +4,7 @@ import { CustomerService } from '../customer.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MustMatch} from '../utils/must-match.validator';
-// import { MustMatch } from './_helpers/must-match.validator';
+
 
 @Component({
   selector: 'app-register-page',
@@ -41,15 +41,9 @@ export class RegisterPageComponent implements OnInit {
   get f() { return this.registerForm.controls; }
   onSubmit() {
     this.submitted = true;
-
-    // stop here if form is invalid
     if (this.registerForm.invalid) {
-      console.log('aaa')
       return;
     }
-
-    // display form values on success
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
     this.tryRegister();
   }
 

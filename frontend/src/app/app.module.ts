@@ -13,6 +13,9 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import {CommonModule} from '@angular/common';
+import { ApartmentsPageComponent } from './apartments-page/apartments-page.component';
+import { ApartmentsSearchFormComponent } from './apartments-page/apartments-search-form/apartments-search-form.component';
+import { ApartmentsTableComponent } from './apartments-page/apartments-table/apartments-table.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import {CommonModule} from '@angular/common';
     HomeComponent,
     NavbarComponent,
     RegisterPageComponent,
+    ApartmentsPageComponent,
+    ApartmentsSearchFormComponent,
+    ApartmentsTableComponent,
   ],
   imports: [
     CommonModule,
