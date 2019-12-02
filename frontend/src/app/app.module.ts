@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,10 @@ import { AsyncObservablePipeComponent } from './async-observable-pipe/async-obse
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import {CommonModule} from '@angular/common';
+import { ApartmentsPageComponent } from './apartments-page/apartments-page.component';
+import { ApartmentsSearchFormComponent } from './apartments-page/apartments-search-form/apartments-search-form.component';
+import { ApartmentsTableComponent } from './apartments-page/apartments-table/apartments-table.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +24,14 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     HomeComponent,
     NavbarComponent,
     RegisterPageComponent,
+    ApartmentsPageComponent,
+    ApartmentsSearchFormComponent,
+    ApartmentsTableComponent,
   ],
   imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,

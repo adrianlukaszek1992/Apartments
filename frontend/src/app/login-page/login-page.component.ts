@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { CustomerService } from '../customer.service';
 import { Router } from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 
 @Component({
   selector: 'app-login-page',
@@ -10,26 +12,39 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
 
-  email = 'test@test.com';
-  password = 'test@123';
+  loginForm: FormGroup;
+  submitted = false;
   error: any;
 
   constructor(
     private apiService: ApiService,
     private customerService: CustomerService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     if (this.customerService.isLogged()) {
       this.router.navigateByUrl('/dashboard');
     }
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
   }
+  get f() { return this.loginForm.controls; }
 
+  onSubmit() {
+    this.submitted = true;
+    if (this.loginForm.invalid) {
+      return;
+    }
+    this.tryLogin();
+  }
    tryLogin() {
     this.apiService.login(
-      this.email,
-      this.password
+      this.loginForm.controls.email.value,
+      this.loginForm.controls.password.value,
     ).subscribe(
       res => {
         if (res.token) {

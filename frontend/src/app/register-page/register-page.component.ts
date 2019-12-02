@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { CustomerService } from '../customer.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {MustMatch} from '../utils/must-match.validator';
+
 
 @Component({
   selector: 'app-register-page',
@@ -10,36 +13,44 @@ import { Router } from '@angular/router';
 })
 export class RegisterPageComponent implements OnInit {
 
-  email = 'test@test.com';
-  password: string;
-  passwordRepeated: string;
-  isPwdMatch: boolean;
+  registerForm: FormGroup;
+  submitted = false;
   error: any;
-  blurPwd: boolean;
 
   constructor(
     private apiService: ApiService,
     private customerService: CustomerService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     if (this.customerService.isLogged()) {
       this.router.navigateByUrl('/dashboard');
     }
+    this.registerForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
+    }, {
+      validator: MustMatch('password', 'confirmPassword')
+    });
   }
 
-  isPasswordMatch() {
-    this.password === this.passwordRepeated
-      ? this.isPwdMatch = true
-      : this.isPwdMatch = false;
-    this.blurPwd = true;
+
+  get f() { return this.registerForm.controls; }
+  onSubmit() {
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      return;
+    }
+    this.tryRegister();
   }
 
    tryRegister() {
      this.apiService.register(
-      this.email,
-      this.password
+       this.registerForm.controls.email.value,
+       this.registerForm.controls.password.value,
     ).subscribe(
        res => {
         if (res.token) {

@@ -1,0 +1,7 @@
+<app-apartments-search-form
+  (formChanged)="searchForm = $event"
+></app-apartments-search-form>
+
+<app-apartments-table
+  [searchForm]="searchForm"
+></app-apartments-table>
