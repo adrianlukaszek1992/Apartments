@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.adrian.SpringRestMySqlApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.093 s - in com.adrian.SpringRestMySqlApplicationTests
