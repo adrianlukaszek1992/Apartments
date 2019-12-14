@@ -24,6 +24,14 @@ export class LoginPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.apiService.validation('das', 'dafs', 'dsa').subscribe(
+      res => {
+       console.log(res);
+      },
+      res => {
+
+        console.log(res);
+      });
     if (this.customerService.isLogged()) {
       this.router.navigateByUrl('/dashboard');
     }

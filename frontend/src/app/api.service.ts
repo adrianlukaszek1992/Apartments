@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { LoginResultModel } from './model/login-result-model';
 import { Observable } from 'rxjs';
 
@@ -7,11 +7,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-
+  private baseUrl = 'http://localhost:8080/authentication';
+  private baseUrl1 = 'http://localhost:8080/booking';
   constructor(private http: HttpClient) { }
 
+  // login(email: string, password: string): Observable<LoginResultModel> {
+  //   return this.http.post<LoginResultModel>('https://reqres.in/api/login', {
+  //     email: email,
+  //     password: password
+  //   });
+  // }
+
   login(email: string, password: string): Observable<LoginResultModel> {
-    return this.http.post<LoginResultModel>('https://reqres.in/api/login', {
+
+    return this.http.post<LoginResultModel>(`${this.baseUrl}` + `/login`, {
       email: email,
       password: password
     });
@@ -22,6 +31,13 @@ export class ApiService {
       email: email,
       password: password
     });
+  }
+  validation(startDate: string, endDate: string, pointName: string): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('startDate', startDate);
+    params = params.append('endDate', endDate);
+    params = params.append('pointName', pointName);
+    return this.http.get(`${this.baseUrl1}` + `/validation`, {params: params});
   }
 
 }
