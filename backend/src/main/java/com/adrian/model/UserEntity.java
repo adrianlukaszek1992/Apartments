@@ -33,17 +33,13 @@ public class UserEntity implements Serializable {
 
     private String street;
 
-    @Column(name="id_profile")
-    private int idProfile;
+    private String profile;
 
     @Column(name="id_city")
     private int idCity;
 
     private int enabled;
 
-    @JoinColumn(name = "id_profile", referencedColumnName = "id_profile", insertable = false, updatable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
-    public ProfileEntity profile;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "idUser")
     public List<ReservationEntity> userReservations;
@@ -55,21 +51,20 @@ public class UserEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     public CityEntity city;
 
-    public UserEntity(String name, String lastname, String email, String password, String phone, String street, int idProfile, int idCity, int enabled) {
+    public UserEntity(String name, String lastname, String email, String password, String phone, String street, String profile, int idCity, int enabled) {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.phone = phone;
         this.street = street;
-        this.idProfile = idProfile;
+        this.profile = profile;
         this.idCity = idCity;
         this.enabled = enabled;
     }
 
     public UserEntity(UserEntity userEntity) {
         this.idUser = userEntity.getIdUser();
-        this.idProfile = userEntity.getIdProfile();
         this.idCity = userEntity.getIdCity();
         this.name = userEntity.getName();
         this.lastname = userEntity.getLastname();

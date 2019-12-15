@@ -1,7 +1,7 @@
 import {  Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 
-const TOKEN = environment.token;
+const CurrentProfile = environment.currentProfile;
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +10,24 @@ export class CustomerService {
 
   constructor() { }
 
-  setToken(token: string): void {
-    localStorage.setItem(TOKEN, token);
+  setCurrentProfile(currentProfile: string): void {
+    localStorage.setItem(CurrentProfile, currentProfile);
   }
 
-  clearToken(token: string): void {
-    localStorage.removeItem(token);
+  clearCurrentProfile(): void {
+    localStorage.removeItem(CurrentProfile);
   }
 
   isLogged() {
-    return localStorage.getItem(TOKEN) != null;
+    return localStorage.getItem(CurrentProfile) != null;
+  }
+
+  isAdmin() {
+    return localStorage.getItem(CurrentProfile) === 'admin';
+  }
+
+  isOwner() {
+    return localStorage.getItem(CurrentProfile) === 'owner';
   }
 
 }

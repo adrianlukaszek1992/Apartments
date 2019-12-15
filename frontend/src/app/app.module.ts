@@ -16,6 +16,8 @@ import {CommonModule} from '@angular/common';
 import { ApartmentsPageComponent } from './apartments-page/apartments-page.component';
 import { ApartmentsSearchFormComponent } from './apartments-page/apartments-search-form/apartments-search-form.component';
 import { ApartmentsTableComponent } from './apartments-page/apartments-table/apartments-table.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { OwnerPageComponent } from './owner-page/owner-page.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { ApartmentsTableComponent } from './apartments-page/apartments-table/apa
     ApartmentsPageComponent,
     ApartmentsSearchFormComponent,
     ApartmentsTableComponent,
+    AdminPageComponent,
+    OwnerPageComponent,
   ],
   imports: [
     CommonModule,
