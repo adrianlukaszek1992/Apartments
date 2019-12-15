@@ -1,5 +1,6 @@
 export interface LoginResultModel {
-    user: string;
+    email: string;
+    profile: string;
     isAdmin: boolean;
     error: string;
 }

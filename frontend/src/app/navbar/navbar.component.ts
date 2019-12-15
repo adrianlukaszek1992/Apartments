@@ -18,7 +18,7 @@ private isLogged: boolean;
   ngOnInit() {
   }
   logout() {
-    this.customerService.clearToken(environment.token);
+    this.customerService.clearCurrentProfile(environment.currentProfile);
     window.location.reload();
   }
 

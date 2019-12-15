@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
-import { CustomerService } from '../customer.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ApiService} from '../api.service';
+import {CustomerService} from '../customer.service';
+import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
@@ -21,26 +21,28 @@ export class LoginPageComponent implements OnInit {
     private customerService: CustomerService,
     private router: Router,
     private formBuilder: FormBuilder
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
-    this.apiService.validation('das', 'dafs', 'dsa').subscribe(
-      res => {
-       console.log(res);
-      },
-      res => {
-
-        console.log(res);
-      });
     if (this.customerService.isLogged()) {
-      this.router.navigateByUrl('/dashboard');
+      if (this.customerService.isAdmin()) {
+        this.router.navigateByUrl('/admin');
+      } else if (this.customerService.isOwner()) {
+        this.router.navigateByUrl('/owner');
+      } else {
+        this.router.navigateByUrl('/dashboard');
+      }
     }
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
-  get f() { return this.loginForm.controls; }
+
+  get f() {
+    return this.loginForm.controls;
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -49,20 +51,36 @@ export class LoginPageComponent implements OnInit {
     }
     this.tryLogin();
   }
-   tryLogin() {
+
+  redirect(res: Object) {
+    let path;
+    if (res.profile === 'owner') {
+      path = '/owner';
+    } else if (res.profile === 'admin') {
+      path = '/admin';
+    } else if (res.profile) {
+      path = '/dashboard';
+    }
+
+    if (res.error) {
+      this.error = res.error;
+    } else {
+      this.customerService.setCurrentProfile(res.profile);
+      this.router.navigateByUrl(path);
+      window.location.reload();
+    }
+  }
+
+  tryLogin() {
     this.apiService.login(
       this.loginForm.controls.email.value,
       this.loginForm.controls.password.value,
     ).subscribe(
       res => {
-        if (res.token) {
-          this.customerService.setToken(res.token);
-          window.location.reload();
-          this.router.navigateByUrl('/dashboard');
-        }
+        this.redirect(res);
       },
       res => {
         this.error = res.error.error;
-        console.log(res.error.error);
       });
-  }}
+  }
+}

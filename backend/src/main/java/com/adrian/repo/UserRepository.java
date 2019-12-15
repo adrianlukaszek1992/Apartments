@@ -21,6 +21,9 @@ public interface UserRepository extends CrudRepository<UserEntity,Integer> {
     @Query("select u from UserEntity u")
     List<UserEntity> findAllUsers();
 
+    @Query("select u.profile from UserEntity u where u.password = :password and u.email= :email")
+    List<String> findProfileByPasswordAndEmail(@Param("password") String password, @Param("email") String email);
+
 
 //    @Query("select u.username, u.password from UserEntity u where u.username = :username")
 //    List<UserEntity> getUserByLogin(@Param("username") String username);

@@ -1,6 +1,6 @@
 package com.adrian.controller;
 
-import com.adrian.repo.UserProfileRepository;
+import com.adrian.repo.UserRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
 
     @Autowired
-    UserProfileRepository repository;
+    UserRepository repository;
 
-    @PostMapping(value = "/login")
-    public String loginIn(@RequestBody String email, String password){
-
-        if(repository.findProfileNameByPasswordAndEmail(email, password).size() == 0){
+    @GetMapping(value = "/login")
+    public String loginIn(@RequestParam String email, String password){
+    System.out.println(email);
+        System.out.println(password);
+        if(repository.findProfileByPasswordAndEmail(password, email).size() == 0){
             return new JSONObject()
                     .put("error", "wrong user name or password")
                     .toString();
         }
         return new JSONObject()
-                .put("profile", repository.findProfileNameByPasswordAndEmail(email, password).get(0))
+                .put("profile", repository.findProfileByPasswordAndEmail(password, email).get(0))
                 .toString();
     }
 }

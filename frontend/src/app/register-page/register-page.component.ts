@@ -53,8 +53,8 @@ export class RegisterPageComponent implements OnInit {
        this.registerForm.controls.password.value,
     ).subscribe(
        res => {
-        if (res.token) {
-          this.customerService.setToken(res.token);
+        if (res.profile) {
+          this.customerService.setCurrentProfile(res.profile);
           window.location.reload();
           this.router.navigateByUrl('/dashboard');
         }

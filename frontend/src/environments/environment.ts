@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  token: 'TOKEN'
+  currentProfile: 'CurrentProfile'
 };
 
 /*

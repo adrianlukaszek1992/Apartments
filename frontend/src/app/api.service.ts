@@ -18,12 +18,11 @@ export class ApiService {
   //   });
   // }
 
-  login(email: string, password: string): Observable<LoginResultModel> {
-
-    return this.http.post<LoginResultModel>(`${this.baseUrl}` + `/login`, {
-      email: email,
-      password: password
-    });
+  login(email: string, password: string): Observable<Object> {
+    let params = new HttpParams();
+    params = params.append('email', email);
+    params = params.append('password', password);
+    return this.http.get(`${this.baseUrl}` + `/login`, {params});
   }
 
   register(email: string, password: string): Observable<LoginResultModel> {

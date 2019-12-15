@@ -1,7 +1,7 @@
 
 --
-CREATE DATABASE IF NOT EXISTS `apartamenty` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `apartamenty`;
+CREATE DATABASE IF NOT EXISTS `apartments` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `apartments`;
 
 
 
@@ -46,16 +46,6 @@ CREATE TABLE IF NOT EXISTS `hotel` (
 )
 
 
-
-CREATE TABLE IF NOT EXISTS `profile` (
-  `id_profile` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) COLLATE utf8_polish_ci DEFAULT NULL,
-  PRIMARY KEY (`id_profile`),
-  UNIQUE KEY `id_UNIQUE` (`id_profile`)
-)
-
-
-
 CREATE TABLE IF NOT EXISTS `reservation` (
   `id_reservation` int(10) NOT NULL AUTO_INCREMENT,
   `date_start` date DEFAULT NULL,
@@ -79,20 +69,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `name` varchar(45) COLLATE utf8_polish_ci DEFAULT NULL,
   `lastname` varchar(45) COLLATE utf8_polish_ci DEFAULT NULL,
   `phone` varchar(45) COLLATE utf8_polish_ci DEFAULT NULL,
-  `id_profile` int(11) DEFAULT NULL,
+  `profile`  varchar(45) COLLATE utf8_polish_ci DEFAULT NULL,
   `id_city` int(11) DEFAULT NULL,
   `street` varchar(200) COLLATE utf8_polish_ci DEFAULT NULL,
   `enabled` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `id_UNIQUE` (`id_user`),
-  KEY `user_profile_fk_idx` (`id_profile`),
   KEY `user_city_fk_idx` (`id_city`)
 )
 
-CREATE OR REPLACE VIEW  `user-profile` AS (
-    SELECT user.id_user as id_user,  user.email as email, user.password as password, profile.name as profile_Name
-    FROM user  inner join  profile on  user.id_profile = profile.id_profile
-);
 
 ALTER TABLE `apartment`
   ADD CONSTRAINT `room_hotel_fk` FOREIGN KEY (`id_hotel`) REFERENCES `hotel` (`id_hotel`) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -107,10 +92,6 @@ ALTER TABLE `reservation`
   ADD CONSTRAINT `reservation_apartment_fk` FOREIGN KEY (`id_apartment`) REFERENCES `apartment` (`id_apartment`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `reservation_user_fk` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-
-ALTER TABLE `user`
-  ADD CONSTRAINT `user_city_fk` FOREIGN KEY (`id_city`) REFERENCES `city` (`id_city`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `user_profile_fk` FOREIGN KEY (`id_profile`) REFERENCES `profile` (`id_profile`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 
