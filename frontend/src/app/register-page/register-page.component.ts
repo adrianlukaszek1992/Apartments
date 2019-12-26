@@ -31,6 +31,11 @@ export class RegisterPageComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      name: ['', [Validators.required, Validators.minLength(6)]],
+      lastName: ['', [Validators.required, Validators.minLength(6)]],
+      street: ['', [Validators.required, Validators.minLength(6)]],
+      city: ['', [Validators.required, Validators.minLength(6)]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^\d{3}-\d{3}-\d{3}$')]],
       confirmPassword: ['', Validators.required],
     }, {
       validator: MustMatch('password', 'confirmPassword')

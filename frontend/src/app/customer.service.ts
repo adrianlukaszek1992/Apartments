@@ -14,8 +14,8 @@ export class CustomerService {
     localStorage.setItem(CurrentProfile, currentProfile);
   }
 
-  clearCurrentProfile(): void {
-    localStorage.removeItem(CurrentProfile);
+  clearCurrentProfile(currentProfile: string): void {
+    localStorage.removeItem(currentProfile  );
   }
 
   isLogged() {
