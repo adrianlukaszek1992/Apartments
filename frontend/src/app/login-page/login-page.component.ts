@@ -3,6 +3,7 @@ import {ApiService} from '../api.service';
 import {CustomerService} from '../customer.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {LoginResultModel} from '../model/login-result-model';
 
 
 @Component({
@@ -52,7 +53,7 @@ export class LoginPageComponent implements OnInit {
     this.tryLogin();
   }
 
-  redirect(res: Object) {
+  redirect(res: LoginResultModel ) {
     let path;
     if (res.profile === 'owner') {
       path = '/owner';

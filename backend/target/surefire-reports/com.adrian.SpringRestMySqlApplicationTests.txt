@@ -1,11 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.adrian.SpringRestMySqlApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 6.773 s <<< FAILURE! - in com.adrian.SpringRestMySqlApplicationTests
-contextLoads(com.adrian.SpringRestMySqlApplicationTests)  Time elapsed: 0.002 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Error accessing tables metadata
-Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Error accessing tables metadata
-Caused by: org.hibernate.exception.GenericJDBCException: Error accessing tables metadata
-Caused by: java.sql.SQLException: View 'apartments.user-profile' references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.38 s - in com.adrian.SpringRestMySqlApplicationTests
