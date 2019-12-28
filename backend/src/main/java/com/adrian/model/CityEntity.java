@@ -42,4 +42,7 @@ public class CityEntity implements Serializable {
         this.state = state;
         this.postalCode = postalCode;
     }
+    public CityEntity(String cityName) {
+        this.cityName = cityName;
+    }
 }

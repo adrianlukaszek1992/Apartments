@@ -14,9 +14,12 @@ public interface CityRepository  extends CrudRepository<CityEntity,Long> {
     @Query("select c from CityEntity c where c.cityName = :name")
     List<CityEntity> findCityListByCityName(@Param("name") String name);
 
-    @Query("select c from CityEntity c where c.idCity = :idCity")
-    List<CityEntity> findCityNameById(@Param("idCity") int idCity);
+    //@Query("select c from CityEntity c where c.idCity = :idCity")
+   // List<CityEntity> findCityNameById(@Param("idCity") int idCity);
 
     @Query("select c from CityEntity c where c.idCity = :idCity")
     CityEntity findCityById(@Param("idCity") int idCity);
+
+    @Query("select c.idCity from CityEntity c where c.cityName = :cityName")
+    List<Integer> findCityIdByCityName (@Param("cityName") String cityName);
 }
