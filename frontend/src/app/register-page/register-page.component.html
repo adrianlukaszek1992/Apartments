@@ -40,11 +40,11 @@
       </div>
       <div class="form-group">
         <label>Last Name</label>
-        <input type="text" formControlName="lastName" [placeholder]="'Kowalski'" class="form-control"
-               [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"/>
+        <input type="text" formControlName="lastname" [placeholder]="'Kowalski'" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"/>
         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-          <div *ngIf="f.lastName.errors.required">Last name is required</div>
-          <div *ngIf="f.lastName.errors.minlength">Last Name must be at least 2 characters</div>
+          <div *ngIf="f.lastname.errors.required">Last name is required</div>
+          <div *ngIf="f.lastname.errors.minlength">Last Name must be at least 2 characters</div>
         </div>
       </div>
       <div class="form-group">
@@ -67,14 +67,25 @@
       </div>
       <div class="form-group">
         <label>Phone number</label>
-        <input type="text" formControlName="phoneNumber" [placeholder]="'111-111-111'" class="form-control"
-               [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }"/>
-        <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
-          <div *ngIf="f.phoneNumber.errors.required">Phone number is required</div>
-          <div *ngIf="f.phoneNumber.errors.pattern">Phone number must have 9 digits</div>
+        <input type="text" formControlName="phone" [placeholder]="'111-111-111'" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"/>
+        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+          <div *ngIf="f.phone.errors.required">Phone number is required</div>
+          <div *ngIf="f.phone.errors.pattern">Phone number must have 9 digits</div>
         </div>
       </div>
-      <p class="alert alert-danger" *ngIf="error">{{error}}</p>
+      <div class="form-group">
+        <label>Profile</label>
+        <select class="form-control" formControlName="profile" [ngClass]="{ 'is-invalid': submitted && f.profile.errors }">
+          <option>client</option>
+          <option>admin</option>
+          <option>owner</option>
+        </select>
+        <div *ngIf="submitted && f.profile.errors" class="invalid-feedback">
+          <div *ngIf="f.profile.errors.required">Profile is required</div>
+        </div>
+      </div>
+      <p class=" alert alert-danger" *ngIf="error">{{error}}</p>
       <button
         type="submit"
         class="btn btn-primary"

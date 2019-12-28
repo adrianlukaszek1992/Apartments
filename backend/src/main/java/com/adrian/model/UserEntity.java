@@ -39,8 +39,7 @@ public class UserEntity implements Serializable {
     private int idCity;
 
     private int enabled;
-
-
+    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "idUser")
     public List<ReservationEntity> userReservations;
 
@@ -52,6 +51,7 @@ public class UserEntity implements Serializable {
     public CityEntity city;
 
     public UserEntity(String name, String lastname, String email, String password, String phone, String street, String profile, int idCity, int enabled) {
+
         this.name = name;
         this.lastname = lastname;
         this.email = email;

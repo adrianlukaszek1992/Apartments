@@ -4,6 +4,7 @@ import { CustomerService } from '../customer.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MustMatch} from '../utils/must-match.validator';
+import {RegisterModel} from '../model/register-model';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class RegisterPageComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   error: any;
+  registerModel: RegisterModel;
 
   constructor(
     private apiService: ApiService,
@@ -29,13 +31,14 @@ export class RegisterPageComponent implements OnInit {
       this.router.navigateByUrl('/dashboard');
     }
     this.registerForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      lastname: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      name: ['', [Validators.required, Validators.minLength(6)]],
-      lastName: ['', [Validators.required, Validators.minLength(6)]],
-      street: ['', [Validators.required, Validators.minLength(6)]],
-      city: ['', [Validators.required, Validators.minLength(6)]],
-      phoneNumber: ['', [Validators.required, Validators.pattern('^\d{3}-\d{3}-\d{3}$')]],
+      phone: ['', [Validators.required, Validators.pattern('^\\d{3}-\\d{3}-\\d{3}$')]],
+      street: ['', [Validators.required, Validators.minLength(2)]],
+      profile: ['', [Validators.required]],
+      city: ['', [Validators.required, Validators.minLength(2)]],
       confirmPassword: ['', Validators.required],
     }, {
       validator: MustMatch('password', 'confirmPassword')
@@ -53,16 +56,19 @@ export class RegisterPageComponent implements OnInit {
   }
 
    tryRegister() {
+     this.registerModel = new RegisterModel(this.registerForm.value);
+     delete this.registerModel['confirmPassword'];
+     console.log(this.registerModel);
      this.apiService.register(
-       this.registerForm.controls.email.value,
-       this.registerForm.controls.password.value,
+       this.registerModel
     ).subscribe(
        res => {
-        if (res.profile) {
-          this.customerService.setCurrentProfile(res.profile);
-          window.location.reload();
-          this.router.navigateByUrl('/dashboard');
-        }
+         console.log(res);
+        // if (res.profile) {
+        //   this.customerService.setCurrentProfile(res.profile);
+        //   window.location.reload();
+        //   this.router.navigateByUrl('/dashboard');
+        // }
       },
       res => {
         this.error = res.error.error;
