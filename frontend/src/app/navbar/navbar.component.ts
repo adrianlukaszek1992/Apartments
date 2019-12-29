@@ -18,7 +18,8 @@ private isLogged: boolean;
   ngOnInit() {
   }
   logout() {
-    this.customerService.clearCurrentProfile(environment.currentProfile);
+    this.customerService.clearCurrentEmail();
+    this.customerService.clearCurrentProfile();
     window.location.reload();
   }
 

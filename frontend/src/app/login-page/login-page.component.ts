@@ -4,7 +4,7 @@ import {CustomerService} from '../customer.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginResultModel} from '../model/login-result-model';
-
+import {Redirect} from '../utils/redirect';
 
 @Component({
   selector: 'app-login-page',
@@ -53,32 +53,17 @@ export class LoginPageComponent implements OnInit {
     this.tryLogin();
   }
 
-  redirect(res: LoginResultModel ) {
-    let path;
-    if (res.profile === 'owner') {
-      path = '/owner';
-    } else if (res.profile === 'admin') {
-      path = '/admin';
-    } else if (res.profile) {
-      path = '/dashboard';
-    }
-
-    if (res.error) {
-      this.error = res.error;
-    } else {
-      this.customerService.setCurrentProfile(res.profile);
-      this.router.navigateByUrl(path);
-      window.location.reload();
-    }
-  }
-
   tryLogin() {
     this.apiService.login(
       this.loginForm.controls.email.value,
       this.loginForm.controls.password.value,
     ).subscribe(
       res => {
-        this.redirect(res);
+        if (res.error) {
+          this.error = res.error;
+        } else {
+          Redirect(res, this.router, this.customerService, this.loginForm.controls.email.value);
+        }
       },
       res => {
         this.error = res.error.error;

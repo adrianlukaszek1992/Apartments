@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
-<div class="line">
-  <nav class="container">
-    <a type="button"  routerLink="home">Home</a>
-    <a type="button"  routerLink="home">Search for the apparment</a>
-    <a type="button" *ngIf="!isLogged" routerLink="register">Register</a>
-    <a type="button" *ngIf="!isLogged"  routerLink="login">Login</a>
-    <a type="button" *ngIf="isLogged" (click)="logout()" routerLink="home">Logout</a>
-  </nav>
-</div>
+<nav class="navbar navbar-expand-lg bg-light">
+  <div id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="searchApartments">Search for the apparment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="isLogged" routerLink="user-profile">Your Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="!isLogged" routerLink="register">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="!isLogged" routerLink="login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="isLogged" (click)="logout()" routerLink="home">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

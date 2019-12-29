@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  currentProfile: 'CurrentProfile'
+  currentProfile: 'CurrentProfile',
+  currentEmail: 'CurrentEmail'
 };
 
 /*
