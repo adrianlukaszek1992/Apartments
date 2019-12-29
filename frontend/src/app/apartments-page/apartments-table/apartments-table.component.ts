@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {SearchApartmentsForm} from '../apartments.service';
+import { ApartmentsService} from '../apartments.service';
 
 @Component({
   selector: 'app-apartments-table',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./apartments-table.component.scss']
 })
 export class ApartmentsTableComponent implements OnInit {
+  @Input() searchForm: SearchApartmentsForm = {};
 
-  constructor() { }
+  constructor(private apartmentsService: ApartmentsService) {
+  }
 
   ngOnInit() {
   }
+  protected doSearch() {
 
+    this.searchResults = null;
+    this.apartmentsService.search(this.searchForm)
+      .subscribe(data => {
+        this.searchResults = data;
+      });
+  }
 }

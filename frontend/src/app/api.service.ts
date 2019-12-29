@@ -1,23 +1,21 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import { LoginResultModel } from './model/login-result-model';
-import { Observable } from 'rxjs';
+import {LoginResultModel} from './model/login-result-model';
+import {Observable} from 'rxjs';
 import {RegisterModel} from './model/register-model';
+import {CustomerService} from './customer.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   private baseUrl = 'http://localhost:8080/authentication';
-  private baseUrl1 = 'http://localhost:8080/booking';
-  constructor(private http: HttpClient) { }
 
-  // login(email: string, password: string): Observable<LoginResultModel> {
-  //   return this.http.post<LoginResultModel>('https://reqres.in/api/login', {
-  //     email: email,
-  //     password: password
-  //   });
-  // }
+  constructor(
+    private http: HttpClient,
+    private customerService: CustomerService) {
+  }
+
 
   login(email: string, password: string): Observable<LoginResultModel> {
     let params = new HttpParams();
@@ -26,16 +24,18 @@ export class ApiService {
     return this.http.get<LoginResultModel>(`${this.baseUrl}` + `/login`, {params});
   }
 
-
-  register(user: Object): Observable<Object> {
+  register(user: any): Observable<any> {
     return this.http.post(`${this.baseUrl}` + `/create`, user);
   }
-  validation(startDate: string, endDate: string, pointName: string): Observable<any> {
-    let params = new HttpParams();
-    params = params.append('startDate', startDate);
-    params = params.append('endDate', endDate);
-    params = params.append('pointName', pointName);
-    return this.http.get(`${this.baseUrl1}` + `/validation`, {params: params});
+
+  update(user: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}` + `/update`, user);
   }
+
+  // getUserProfile(): Observable<RegisterModel> {
+  //   let params = new HttpParams();
+  //   params = params.append('email', this.customerService.getCurrentEmail());
+  //   return this.http.get<LoginResultModel>(`${this.baseUrl}` + `/login`, {params});
+  // }
 
 }
