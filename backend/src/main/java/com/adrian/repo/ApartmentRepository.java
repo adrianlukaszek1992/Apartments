@@ -21,4 +21,11 @@ public interface ApartmentRepository extends CrudRepository<ApartmentEntity, Int
 
     @Query("select a from ApartmentEntity a where a.status in('Available')")
     List<ApartmentEntity> findAllAvailable();
+
+    @Query("select a.name from ApartmentEntity a where a.idHotel = :idHotel")
+    List<String> findApartmentNameByHotelId(@Param("idHotel") int idHotel);
+    @Query("select a.name, a.idHotel from ApartmentEntity a")
+    List<ApartmentEntity> findAllApartmentNamesAndHotelIds();
+    @Query("select a from ApartmentEntity a")
+    List<ApartmentEntity> findAllApartments();
 }

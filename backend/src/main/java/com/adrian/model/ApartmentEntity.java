@@ -54,4 +54,5 @@ public class ApartmentEntity implements Serializable {
         this.price = price;
         this.status = status;
     }
+
 }

@@ -6,7 +6,9 @@
         <input
           id="place"
           class="form-control"
-          [required]="false"
+          type="text"
+          [required]="true"
+          (blur)="verifyForm()"
           [(ngModel)]="form.place"
           [ngModelOptions]="{standalone: true}"
         />
@@ -16,7 +18,9 @@
         <input
           id="hotelName"
           class="form-control"
-          [required]="false"
+          type="text"
+          [required]="true"
+          (blur)="verifyForm()"
           [(ngModel)]="form.hotelName"
           [ngModelOptions]="{standalone: true}"
         />
@@ -26,7 +30,9 @@
         <input
           id="startDate"
           class="form-control"
-          [required]="false"
+          type="date"
+          [required]="true"
+          (blur)="verifyForm()"
           [(ngModel)]="form.startDate"
           [ngModelOptions]="{standalone: true}"
         />
@@ -37,15 +43,19 @@
         <input
           id="endDate"
           class="form-control"
-          [required]="false"
+          type="date"
+          [required]="true"
+          (blur)="verifyForm();checkDates()"
           [(ngModel)]="form.endDate"
           [ngModelOptions]="{standalone: true}"
         />
+        <label style="color: red" for="endDate" [hidden]="!isStartDateBigger">Start Date cannot be bigger than End Date</label>
       </div>
 
       <div class="form-group ">
         <button class="btn btn-primary "
                 type="submit"
+                [disabled]="!isFormValid"
                 (click)="search()">
           Search
         </button>

@@ -1,3 +1,48 @@
-<p>
-  apartments-table works!
-</p>
+<div>
+
+  <table class="table table-bordered">
+    <thead class="thead-light text-center">
+    <tr>
+      <th>
+        Hotel Name
+      </th>
+      <th>
+        Apartment Name
+      </th>
+      <th>
+        Street
+      </th>
+      <th>
+        City
+      </th>
+      <th>
+        Status
+      </th>
+    </tr>
+    </thead>
+    <tbody *ngIf="searchResults">
+    <tr *ngFor="let row of searchResults"
+    >
+      <td class="text-center">
+        {{row['hotelName']}}
+      </td>
+      <td class="text-center">
+        {{row['apartmentName']}}
+      </td>
+      <td class="text-center">
+        {{row['street']}}
+      </td>
+      <td class="text-center">
+        {{row['city']}}
+      </td>
+      <td class="text-center">
+        {{row['status']}}
+      </td>
+      <td class="text-center">
+        <button class="btn btn-danger fa fa-trash-o" (click)="$event.stopPropagation(); remove(row.jointProduct)"></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>

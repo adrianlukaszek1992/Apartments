@@ -20,6 +20,7 @@ public class AuthenticationController {
     @GetMapping(value = "/login")
     public String loginIn(@RequestParam String email, String password){
     System.out.println(email);
+
         System.out.println(password);
         if(repository.findProfileByPasswordAndEmail(password, email).size() == 0){
             return new JSONObject()
