@@ -17,6 +17,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'searchApartments', component: ApartmentsPageComponent},
   {path: 'apartmentDatails', component: ApartmentDatailsPageComponent},
+  {path: 'user-reservations', component: DashboardPageComponent},
   {path: 'home', component: HomeComponent},
   {path: 'user-profile', component: UserProfilePageComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginPageComponent},

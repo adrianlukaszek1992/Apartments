@@ -1,6 +1,6 @@
 package com.adrian.mapper;
 
-public class ApartmentDetailsViewMapper {
+public class ApartmentDetailsViewWrapper {
     public String getHotelName() {
         return hotelName;
     }
@@ -83,7 +83,7 @@ public class ApartmentDetailsViewMapper {
     private int size;
     private float price;
 
-    public ApartmentDetailsViewMapper(String description, String hotelName, int rating, String status, String apartmentName, String street, String city, int size, float price) {
+    public ApartmentDetailsViewWrapper(String description, String hotelName, int rating, String status, String apartmentName, String street, String city, int size, float price) {
         this.description = description;
         this.hotelName = hotelName;
         this.rating = rating;

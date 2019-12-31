@@ -1,3 +1,134 @@
-<p>
-  dashboard-page works!
-</p>
+<div>
+<h3>Your current reservations</h3>
+  <table class="table table-bordered">
+    <thead class="thead-light text-center">
+    <tr>
+      <th>
+        Apartment Name
+      </th>
+      <th>
+        Street
+      </th>
+      <th>
+        City
+      </th>
+      <th>
+        HotelName
+      </th>
+      <th>
+        Start date
+      </th>
+      <th>
+        End date
+      </th>
+      <th>
+        Status
+      </th>
+      <th>
+        Price
+      </th>
+      <th>
+        Cancel Reservation
+      </th>
+    </tr>
+    </thead>
+    <tbody *ngIf="currentReservations">
+    <tr *ngFor="let row of currentReservations"
+    >
+      <td class="text-center">
+        {{row['apartmentName']}}
+      </td>
+      <td class="text-center">
+        {{row['street']}}
+      </td>
+      <td class="text-center">
+        {{row['city']}}
+      </td>
+      <td class="text-center">
+        {{row['hotelName']}}
+      </td>
+      <td class="text-center">
+        {{row['startDate']}}
+      </td>
+      <td class="text-center">
+        {{row['endDate']}}
+      </td>
+      <td class="text-center">
+        {{row['status']}}
+      </td>
+      <td class="text-center">
+        {{row['price']}}
+      </td>
+      <td class="text-center">
+        <button class="btn fa fa-trash-o" (click)="cancelReservation(row['apartmentName'], row['startDate'])">Cancel</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div>
+  <h3>Your historic reservations</h3>
+  <table class="table table-bordered">
+    <thead class="thead-light text-center">
+    <tr>
+      <th>
+        Apartment Name
+      </th>
+      <th>
+        Street
+      </th>
+      <th>
+        City
+      </th>
+      <th>
+        HotelName
+      </th>
+      <th>
+        Start date
+      </th>
+      <th>
+        End date
+      </th>
+      <th>
+        Status
+      </th>
+      <th>
+        Price
+      </th>
+
+    </tr>
+    </thead>
+    <tbody *ngIf="historicReservations">
+    <tr *ngFor="let row of historicReservations"
+    >
+      <td class="text-center">
+        {{row['apartmentName']}}
+      </td>
+      <td class="text-center">
+        {{row['street']}}
+      </td>
+      <td class="text-center">
+        {{row['city']}}
+      </td>
+      <td class="text-center">
+        {{row['hotelName']}}
+      </td>
+      <td class="text-center">
+        {{row['startDate']}}
+      </td>
+      <td class="text-center">
+        {{row['endDate']}}
+      </td>
+      <td class="text-center">
+        {{row['status']}}
+      </td>
+      <td class="text-center">
+        {{row['price']}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>

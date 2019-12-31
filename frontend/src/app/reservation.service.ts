@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ApartmentDetailsModel} from './model/apartment-details-model';
+import {ReservationModel} from './model/reservation-model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,24 @@ export class ReservationService {
     params = params.append('endDate', endDate);
     params = params.append('userEmail', userEmail);
     return this.http.get(`${this.baseUrl}` + `/reserve`, {params});
+  }
+
+  getCurrentReservations(userEmail: string): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('userEmail', userEmail);
+    return this.http.get<ReservationModel>(`${this.baseUrl}` + `/current`, {params});
+  }
+
+  getHistoricReservations(userEmail: string): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('userEmail', userEmail);
+    return this.http.get<ReservationModel>(`${this.baseUrl}` + `/historic`, {params});
+  }
+
+  cancelReservation(apartmentName: string, startDate: string): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('apartmentName', apartmentName);
+    params = params.append('startDate', startDate);
+    return this.http.get<ReservationModel>(`${this.baseUrl}` + `/cancel`, {params});
   }
 }

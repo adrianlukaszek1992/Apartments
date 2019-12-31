@@ -26,7 +26,7 @@ export class ApartmentDatailsPageComponent implements OnInit {
     private customerService: CustomerService
   ) {
     this.isLogged = this.customerService.isLogged();
-    console.log(this.isLogged)
+    console.log(this.isLogged);
     this.apartmentsService.getApartmetDetails(this.apartmentsService.getApartmentName())
       .subscribe(data => {
         console.log(data);
@@ -53,12 +53,15 @@ export class ApartmentDatailsPageComponent implements OnInit {
   }
 
   reserve() {
+    this.error = null;
     this.reservationService.tryReserve(this.apartmentDetails['apartmentName'],
       this.startDate, this.endDate, this.customerService.getCurrentEmail())
       .subscribe(data => {
         data['massage']
           ? window.alert(data['massage'])
           : this.error = data['error'];
+      }, res => {
+        this.error = res.error.error;
       });
   }
 
