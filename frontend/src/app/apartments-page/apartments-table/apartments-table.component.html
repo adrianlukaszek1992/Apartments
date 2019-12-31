@@ -18,6 +18,9 @@
       <th>
         Status
       </th>
+      <th>
+        Show datails
+      </th>
     </tr>
     </thead>
     <tbody *ngIf="searchResults">
@@ -39,7 +42,7 @@
         {{row['status']}}
       </td>
       <td class="text-center">
-        <button class="btn btn-danger fa fa-trash-o" (click)="$event.stopPropagation(); remove(row.jointProduct)"></button>
+        <button class="btn fa fa-trash-o" (click)="showDetails(row['apartmentName'])">Show details</button>
       </td>
     </tr>
     </tbody>

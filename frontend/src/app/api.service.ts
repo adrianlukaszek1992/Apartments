@@ -12,8 +12,7 @@ export class ApiService {
   private baseUrl = 'http://localhost:8080/authentication';
 
   constructor(
-    private http: HttpClient,
-    private customerService: CustomerService) {
+    private http: HttpClient) {
   }
 
 
@@ -31,11 +30,4 @@ export class ApiService {
   update(user: any): Observable<any> {
     return this.http.post(`${this.baseUrl}` + `/update`, user);
   }
-
-  // getUserProfile(): Observable<RegisterModel> {
-  //   let params = new HttpParams();
-  //   params = params.append('email', this.customerService.getCurrentEmail());
-  //   return this.http.get<LoginResultModel>(`${this.baseUrl}` + `/login`, {params});
-  // }
-
 }

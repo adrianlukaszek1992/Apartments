@@ -30,6 +30,6 @@ insert into apartment (id_hotel, name, size, price, status)
 values (2, 'name2', 5, 15, 'free');
 
 insert into reservation (date_start, date_end, price, id_apartment, id_user, status)
-values (STR_TO_DATE('1-01-2012', '%d-%m-%Y'), STR_TO_DATE('1-01-2015', '%d-%m-%Y'), 30, 1,3,'confirmed');
+values (STR_TO_DATE('1-01-2012', '%d-%m-%Y'), STR_TO_DATE('1-01-2015', '%d-%m-%Y'), 30, 1,3,'Approved');
 
 commit;
