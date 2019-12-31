@@ -70,7 +70,8 @@
                               (click)="reserve()">
                         Reserve
                       </button>
-            <p [hidden]="isLogged" style="color: red">Reservation is possible only for signed Users:</p>
+            <p class="alert alert-danger" *ngIf="!isLogged" style="color: red">Reservation is possible only for signed Users:</p>
+            <p class="alert alert-danger" *ngIf="error">{{error}}</p>
           </span>
         </form>
 

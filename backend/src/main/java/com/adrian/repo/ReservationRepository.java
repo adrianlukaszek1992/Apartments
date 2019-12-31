@@ -19,7 +19,7 @@ public interface ReservationRepository extends CrudRepository<ReservationEntity,
 
     @Query("select r from ReservationEntity r where r.idApartment = :idApartment and (:startDate between r.startDate and r.endDate or :endDate between r.startDate and r.endDate " +
             "or r.startDate between :startDate and :endDate or r.endDate between :startDate and :endDate) and r.status in ('Approved','Waiting')")
-    List<ReservationEntity> findAllIdApartmentFromAGivenDateRangeAndApartmentId(@Param("startDate")LocalDate startDate,
+    List<ReservationEntity> findAllReservationFromAGivenDateRangeAndApartmentId(@Param("startDate")LocalDate startDate,
                                                                                 @Param("endDate")LocalDate endDate,
                                                                                 @Param("idApartment")Integer idApartment);
 
@@ -28,4 +28,16 @@ public interface ReservationRepository extends CrudRepository<ReservationEntity,
 
     @Query("select r from ReservationEntity r where r.idApartment = :idApartment and r.status = :status")
     List<ReservationEntity> findAllReservationByApartmentId(@Param("idApartment") Integer idApartment, @Param("status") String status);
+
+    @Query("select r from ReservationEntity r where r.idUser = :idUser and startDate >= :date")
+    List<ReservationEntity> findAllReservationByUserAndStartDateMoreThan(@Param("idUser")int idUser,
+                                                                                @Param("date")LocalDate endDate);
+
+    @Query("select r from ReservationEntity r where r.idUser = :idUser and startDate < :date")
+    List<ReservationEntity> findAllReservationByUserAndStartDateLessThan(@Param("idUser")int idUser,
+                                                                         @Param("date")LocalDate endDate);
+
+    @Query("select r from ReservationEntity r where r.idApartment = :idApartment and startDate = :startDate")
+    List<ReservationEntity>  findByIdApartmentAndStartDate(@Param("idApartment")int idApartment,
+                                         @Param("startDate")LocalDate startDate);
 }

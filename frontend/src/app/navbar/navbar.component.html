@@ -13,6 +13,9 @@
         <a class="nav-link" *ngIf="isLogged" routerLink="user-profile">Your Profile</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" *ngIf="isLogged && !isAdmin && !isOwner" routerLink="user-reservations">Your Reservations</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" *ngIf="!isLogged" routerLink="register">Register</a>
       </li>
       <li class="nav-item">

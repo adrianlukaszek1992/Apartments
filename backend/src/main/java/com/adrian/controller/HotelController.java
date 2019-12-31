@@ -1,8 +1,8 @@
 package com.adrian.controller;
 
 import com.adrian.Services.CityService;
-import com.adrian.mapper.ApartmentDetailsViewMapper;
-import com.adrian.mapper.ApartmentsSearchResultViewMapper;
+import com.adrian.mapper.ApartmentDetailsViewWrapper;
+import com.adrian.mapper.ApartmentsSearchResultViewWrapper;
 import com.adrian.model.ApartmentEntity;
 import com.adrian.model.HotelEntity;
 import com.adrian.repo.*;
@@ -33,8 +33,8 @@ public class HotelController {
     CityService cityService;
 
     @GetMapping(value = "/search")
-    public List<ApartmentsSearchResultViewMapper> getHotels(@RequestParam String place, String hotelName, String startDate, String endDate) {
-        List<ApartmentsSearchResultViewMapper> result = new ArrayList<>();
+    public List<ApartmentsSearchResultViewWrapper> getHotels(@RequestParam String place, String hotelName, String startDate, String endDate) {
+        List<ApartmentsSearchResultViewWrapper> result = new ArrayList<>();
 
         if (!place.equals("undefined") && hotelRepository.findListOfHotelsByCityId(cityService.getNameToIdCity().get(place)).size() == 0) {
             return result;
@@ -65,7 +65,7 @@ public class HotelController {
         for (ApartmentEntity apartment : apartments) {
             for (HotelEntity hotelEntity : hotelEntities) {
                 if (apartment.getIdHotel() == hotelEntity.getIdHotel()) {
-                    result.add(new ApartmentsSearchResultViewMapper(hotelEntity.getName(), apartment.getName(), hotelEntity.getStreet(), cityService.getIdToNameCity().get(hotelEntity.getIdCity()), apartment.getStatus()));
+                    result.add(new ApartmentsSearchResultViewWrapper(hotelEntity.getName(), apartment.getName(), hotelEntity.getStreet(), cityService.getIdToNameCity().get(hotelEntity.getIdCity()), apartment.getStatus()));
                 }
             }
         }
@@ -73,14 +73,14 @@ public class HotelController {
     }
 
     @GetMapping(value = "/details")
-    public ApartmentDetailsViewMapper getApartmentDetails(@RequestParam String apartmentName) {
-        ApartmentDetailsViewMapper result;
+    public ApartmentDetailsViewWrapper getApartmentDetails(@RequestParam String apartmentName) {
+        ApartmentDetailsViewWrapper result;
         List<ApartmentEntity> apartments = apartmentRepository.findApartmentEntityByName(apartmentName);
         ApartmentEntity apartment = apartments.get(0);
         List<HotelEntity> hotels = hotelRepository.findHotelById(apartment.getIdHotel());
         HotelEntity hotel = hotels.get(0);
         String cityName = cityService.getIdToNameCity().get((hotel.getIdCity()));
-        result = new ApartmentDetailsViewMapper(hotel.getDescription(), hotel.getName(), hotel.getRating(), apartment.getStatus(), apartmentName, hotel.getStreet(), cityName, apartment.getSize(), apartment.getPrice());
+        result = new ApartmentDetailsViewWrapper(hotel.getDescription(), hotel.getName(), hotel.getRating(), apartment.getStatus(), apartmentName, hotel.getStreet(), cityName, apartment.getSize(), apartment.getPrice());
         return result;
     }
 
