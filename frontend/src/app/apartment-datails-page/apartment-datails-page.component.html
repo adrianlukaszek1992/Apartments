@@ -1,0 +1,78 @@
+<main class="container">
+  <h2>{{apartmentDetails['apartmentName']}}</h2>
+  <section class="row panel" >
+
+                <span class="col-sm-3 col-md-3 col-lg-3">
+                    <p>Hotel Name:</p>
+                    <p type='text' id='hotelName'>{{apartmentDetails['hotelName']}}</p>
+                    <p>Rating (Stars):</p>
+                    <p type='text' id='rating'>{{apartmentDetails['rating']}}</p>
+                    <p>Status:</p>
+                    <p type='text' id='status'>{{apartmentDetails['status']}}</p>
+                </span>
+        <span class="col-sm-3 col-md-3 col-lg-3">
+                    <p>Apartment Name:</p>
+                    <p type='text' id='apartmentName'>{{apartmentDetails['apartmentName']}}</p>
+                    <p>Street:</p>
+                      <p type='text' id='street'>{{apartmentDetails['street']}}</p>
+                    <p>City:</p>
+                     <p type='text' id='city'>{{apartmentDetails['city']}}</p>
+                </span>
+        <span class="col-sm-3 col-md-3 col-lg-3">
+                    <p>Size in Square metres:</p>
+                    <p type='text' id='size'>{{apartmentDetails['size']}}</p>
+                    <p>Price:</p>
+                     <p type='text' id='price'>{{apartmentDetails['price']}}</p>
+                </span>
+        <span class="col-sm-3 col-md-3 col-lg-3">
+                    <p>Description:</p>
+                     <p type='text' id='name'>{{apartmentDetails['description']}}</p>
+                </span>
+
+  </section>
+
+  <h3>Reserve Apartment</h3>
+  <section class="row panel" id="reserve_apartment">
+
+        <form class="ngForm">
+          <span class="col-sm-2 col-md-2 col-lg-2">
+                        <p>Start Date:</p>
+                        <input
+                          id="startDate"
+                          class="form-control"
+                          type="date"
+                          [required]="true"
+                          (blur)="verifyForm()"
+                          [(ngModel)]="startDate"
+                          [ngModelOptions]="{standalone: true}"
+                        />
+                    </span>
+          <span class="col-sm-2 col-md-2 col-lg-2">
+                        <p>End Date Date:</p>
+                         <input
+                           id="endDate"
+                           class="form-control"
+                           type="date"
+                           [required]="true"
+                           (blur)="verifyForm();checkDates()"
+                           [(ngModel)]="endDate"
+                           [ngModelOptions]="{standalone: true}"
+                         />
+                    </span>
+          <span class="col-sm-3 col-md-3 col-lg-3">
+                    <p>Apartment Name:</p>
+                    <p type='text' id='apartmentNameToSearch'>{{apartmentDetails['apartmentName']}}</p>
+                    </span>
+          <span class="col-sm-5 col-md-5 col-lg-5 blue_buttom">
+                      <button class="btn btn-primary "
+                              type="submit"
+                              [disabled]="!isLogged || !isFormValid"
+                              (click)="reserve()">
+                        Reserve
+                      </button>
+            <p [hidden]="isLogged" style="color: red">Reservation is possible only for signed Users:</p>
+          </span>
+        </form>
+
+  </section>
+</main>

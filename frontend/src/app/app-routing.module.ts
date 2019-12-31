@@ -7,6 +7,7 @@ import {AuthGuard} from './auth.guard';
 import {AdminGuard} from './admin.guard';
 import {HomeComponent} from './home/home.component';
 import {OwnerGuard} from './owner.guard';
+import {ApartmentDatailsPageComponent} from './apartment-datails-page/apartment-datails-page.component';
 import {AdminPageComponent} from './admin-page/admin-page.component';
 import {OwnerPageComponent} from './owner-page/owner-page.component';
 import {UserProfilePageComponent} from './user-profile-page/user-profile-page.component';
@@ -15,6 +16,7 @@ import {ApartmentsPageComponent} from './apartments-page/apartments-page.compone
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'searchApartments', component: ApartmentsPageComponent},
+  {path: 'apartmentDatails', component: ApartmentDatailsPageComponent},
   {path: 'home', component: HomeComponent},
   {path: 'user-profile', component: UserProfilePageComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginPageComponent},

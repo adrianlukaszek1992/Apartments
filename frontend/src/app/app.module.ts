@@ -20,6 +20,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { OwnerPageComponent } from './owner-page/owner-page.component';
 import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { ApartmentDatailsPageComponent } from './apartment-datails-page/apartment-datails-page.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     OwnerPageComponent,
     UserProfilePageComponent,
     RegisterFormComponent,
+    ApartmentDatailsPageComponent,
   ],
   imports: [
     CommonModule,
