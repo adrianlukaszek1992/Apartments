@@ -22,6 +22,15 @@
         <a class="nav-link" *ngIf="!isLogged" routerLink="login">Login</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" *ngIf="isOwner" routerLink="owner">Manage your Hotels</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="isOwner" routerLink="reservation-owner">Manage Reservations</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="isAdmin" routerLink="admin">Manage users</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" *ngIf="isLogged" (click)="logout()" routerLink="home">Logout</a>
       </li>
     </ul>

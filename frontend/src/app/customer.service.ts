@@ -3,6 +3,8 @@ import {environment} from '../environments/environment';
 
 const CurrentProfile = environment.currentProfile;
 const CurrentEmail = environment.currentEmail;
+const CurrentApartment = environment.currentApartment;
+const CurrentHotel = environment.currentHotel;
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,30 @@ const CurrentEmail = environment.currentEmail;
 export class CustomerService {
 
   constructor() {
+  }
+
+  setCurrentHotel(currentHotel: string): void {
+    localStorage.setItem(CurrentHotel, currentHotel);
+  }
+
+  clearCurrentHotel(): void {
+    localStorage.removeItem(CurrentHotel);
+  }
+
+  getCurrentHotel(): string {
+    return localStorage.getItem(CurrentHotel);
+  }
+
+  setCurrentApartment(currentApartment: string): void {
+    localStorage.setItem(CurrentApartment, currentApartment);
+  }
+
+  clearCurrentApartment(): void {
+    localStorage.removeItem(CurrentApartment);
+  }
+
+  getCurrentApartment(): string {
+    return localStorage.getItem(CurrentApartment);
   }
 
   setCurrentProfile(currentProfile: string): void {

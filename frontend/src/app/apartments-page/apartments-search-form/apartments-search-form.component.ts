@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {SearchApartmentsForm} from '../apartments.service';
-import {Observable} from 'rxjs';
+
 
 @Component({
   selector: 'app-apartments-search-form',

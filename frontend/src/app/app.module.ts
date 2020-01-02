@@ -20,7 +20,11 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { OwnerPageComponent } from './owner-page/owner-page.component';
 import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
-import { ApartmentDatailsPageComponent } from './apartment-datails-page/apartment-datails-page.component';
+import { ApartmentDetailsPageComponent } from './apartment-datails-page/apartment-datails-page.component';
+import { HotelFormComponent } from './hotel-form/hotel-form.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ApartmentOwnerPageComponent } from './apartment-owner-page/apartment-owner-page.component';
+import { OwnerReservationsComponent } from './owner-reservations/owner-reservations.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,10 @@ import { ApartmentDatailsPageComponent } from './apartment-datails-page/apartmen
     OwnerPageComponent,
     UserProfilePageComponent,
     RegisterFormComponent,
-    ApartmentDatailsPageComponent,
+    ApartmentDetailsPageComponent,
+    HotelFormComponent,
+    ApartmentOwnerPageComponent,
+    OwnerReservationsComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +54,8 @@ import { ApartmentDatailsPageComponent } from './apartment-datails-page/apartmen
     HttpClientModule,
     AppRoutingModule,
     LoginPageModule,
-    DashboardPageModule
+    DashboardPageModule,
+    NgbModule.forRoot(),
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

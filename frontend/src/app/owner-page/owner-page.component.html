@@ -1,3 +1,130 @@
-<p>
-  owner-page works!
-</p>
+<app-hotel-form [isModify]="false"></app-hotel-form>
+
+<div>
+
+  <table class="table table-bordered">
+    <thead class="thead-light text-center">
+    <tr>
+      <th>
+        Hotel Name
+      </th>
+      <th>
+        Rating (stars)
+      </th>
+      <th>
+        Street
+      </th>
+      <th>
+        City
+      </th>
+      <th>
+        Status
+      </th>
+      <th>
+        Modify
+      </th>
+      <th>
+        Delete
+      </th>
+    </tr>
+    </thead>
+    <tbody *ngIf="hotels">
+    <tr *ngFor="let row of hotels"
+    >
+      <td class="text-center">
+        {{row['hotelName']}}
+      </td>
+      <td class="text-center">
+        {{row['ratting']}}
+      </td>
+      <td class="text-center">
+        {{row['street']}}
+      </td>
+      <td class="text-center">
+        {{row['city']}}
+      </td>
+      <td class="text-center">
+        {{row['description']}}
+      </td>
+      <td class="text-center">
+        <button class="btn fa fa-trash-o" (click)="openModal(content, row['hotelName'])">Modify in Modal</button>
+      </td>
+      <td class="text-center">
+        <button class="btn fa fa-trash-o" (click)="deleteHotel(row['hotelName'])">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Hotel update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-hotel-form [isModify]="true" [hotelName]="hotelName"></app-hotel-form>
+    </div>
+    <h3 class="modal-title" id="modal-apartment-title">List of apartments</h3>
+    <table class="table table-bordered">
+      <thead class="thead-light text-center">
+      <tr>
+        <th>
+          Hotel Name
+        </th>
+        <th>
+          Apartment Name
+        </th>
+        <th>
+          Size
+        </th>
+        <th>
+          Price
+        </th>
+        <th>
+          Status
+        </th>
+        <th>
+          Modify
+        </th>
+        <th>
+          Delete
+        </th>
+      </tr>
+      </thead>
+      <tbody *ngIf="apartments">
+      <tr *ngFor="let row of apartments"
+      >
+        <td class="text-center">
+          {{row['hotelName']}}
+        </td>
+        <td class="text-center">
+          {{row['apartmentName']}}
+        </td>
+        <td class="text-center">
+          {{row['size']}}
+        </td>
+        <td class="text-center">
+          {{row['price']}}
+        </td>
+        <td class="text-center">
+          {{row['status']}}
+        </td>
+        <td class="text-center">
+          <button class="btn fa fa-trash-o" (click)="modifyApartment(row['apartmentName'], row['hotelName']);modal.dismiss('Cross click')">Modify in new Page</button>
+        </td>
+        <td class="text-center">
+          <button class="btn fa fa-trash-o" (click)="deleteApartment(row['hotelName'])">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="form-group col-xs-4 col-md-4">
+      <button class="btn btn-primary" (click)="addApartment();modal.dismiss('Cross click')">Add new Appartment</button>
+    </div>
+  </div>
+</ng-template>

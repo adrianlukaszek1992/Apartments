@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   currentProfile: 'CurrentProfile',
-  currentEmail: 'CurrentEmail'
+  currentEmail: 'CurrentEmail',
+  currentApartment: 'CurrentApartment',
+  currentHotel: 'CurrentHotel',
 };
 
 /*
