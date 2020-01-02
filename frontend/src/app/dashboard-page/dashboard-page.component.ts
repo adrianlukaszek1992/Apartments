@@ -25,12 +25,10 @@ export class DashboardPageComponent implements OnInit {
     const email = this.customerService.getCurrentEmail();
     this.reservationService.getCurrentReservations(email)
       .subscribe(data => {
-        console.log(data)
         this.currentReservations = data;
       });
     this.reservationService.getHistoricReservations(email)
       .subscribe(data => {
-        console.log(data)
         this.historicReservations = data;
       });
   }
@@ -38,7 +36,7 @@ export class DashboardPageComponent implements OnInit {
   cancelReservation(apartmentName: string, startDate: string) {
     this.reservationService.cancelReservation(apartmentName, startDate)
       .subscribe(data => {
-        window.alert(data['massage']);
+        window.alert(data['message']);
       });
   }
 

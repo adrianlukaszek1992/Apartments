@@ -40,4 +40,25 @@ export class ReservationService {
     params = params.append('startDate', startDate);
     return this.http.get<ReservationModel>(`${this.baseUrl}` + `/cancel`, {params});
   }
+
+
+  updateStatusReservation(apartmentName: string, startDate: string, isApproved: any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('apartmentName', apartmentName);
+    params = params.append('startDate', startDate);
+    params = params.append('isApproved', isApproved);
+    return this.http.get<ReservationModel>(`${this.baseUrl}` + `/updateStatus`, {params});
+  }
+
+  getCurrentReservationsOwner(userEmail: string): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('userEmail', userEmail);
+    return this.http.get<ReservationModel>(`${this.baseUrl}` + `/currentOwner`, {params});
+  }
+
+  getHistoricReservationsOwner(userEmail: string): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('userEmail', userEmail);
+    return this.http.get<ReservationModel>(`${this.baseUrl}` + `/historicOwner`, {params});
+  }
 }

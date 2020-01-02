@@ -26,6 +26,9 @@ public interface ReservationRepository extends CrudRepository<ReservationEntity,
     @Query("select r from ReservationEntity r where r.idUser = :idUser and r.status = :status")
     List<ReservationEntity> findAllReservationByUserId(@Param("idUser") Integer idUser, @Param("status") String status);
 
+    @Query("select r from ReservationEntity r where r.idUser = :idUser and r.status <> :status")
+    List<ReservationEntity> findAllReservationByUserIdAndStatusNot(@Param("idUser") Integer idUser, @Param("status") String status);
+
     @Query("select r from ReservationEntity r where r.idApartment = :idApartment and r.status = :status")
     List<ReservationEntity> findAllReservationByApartmentId(@Param("idApartment") Integer idApartment, @Param("status") String status);
 
@@ -40,4 +43,11 @@ public interface ReservationRepository extends CrudRepository<ReservationEntity,
     @Query("select r from ReservationEntity r where r.idApartment = :idApartment and startDate = :startDate")
     List<ReservationEntity>  findByIdApartmentAndStartDate(@Param("idApartment")int idApartment,
                                          @Param("startDate")LocalDate startDate);
+
+
+    @Query("select r from ReservationEntity r where r.idApartment IN :idApartments and r.status = :status")
+    List<ReservationEntity> findAllReservationByApartmetIdsAndStatus(@Param("idApartments") List<Integer> idApartments, @Param("status") String status);
+
+    @Query("select r from ReservationEntity r where r.idApartment IN :idApartments and r.status <> :status")
+    List<ReservationEntity> findAllReservationByApartmetIdsAndStatusNot(@Param("idApartments") List<Integer> idApartments, @Param("status") String status);
 }

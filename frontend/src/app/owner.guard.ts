@@ -17,10 +17,9 @@ export class OwnerGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    if (this.customerService.isAdmin()) {
+    if (this.customerService.isOwner()) {
       return true;
     }
-
     this.router.navigateByUrl(
       this.router.createUrlTree(['/login'])
     );

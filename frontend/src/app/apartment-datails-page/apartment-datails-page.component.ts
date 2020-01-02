@@ -11,7 +11,7 @@ import {CustomerService} from '../customer.service';
   templateUrl: './apartment-datails-page.component.html',
   styleUrls: ['./apartment-datails-page.component.scss']
 })
-export class ApartmentDatailsPageComponent implements OnInit {
+export class ApartmentDetailsPageComponent implements OnInit {
   apartmentDetails: Observable<ApartmentDetailsModel>;
   isFormValid = false;
   isStartDateBigger = false;
@@ -57,8 +57,8 @@ export class ApartmentDatailsPageComponent implements OnInit {
     this.reservationService.tryReserve(this.apartmentDetails['apartmentName'],
       this.startDate, this.endDate, this.customerService.getCurrentEmail())
       .subscribe(data => {
-        data['massage']
-          ? window.alert(data['massage'])
+        data['message']
+          ? window.alert(data['message'])
           : this.error = data['error'];
       }, res => {
         this.error = res.error.error;

@@ -38,6 +38,6 @@ export class ApartmentsTableComponent implements OnInit, OnChanges {
 
   showDetails(apartmentName: string) {
     this.apartmentsService.setApartmentName(apartmentName);
-    this.router.navigateByUrl('/apartmentDatails');
+    this.router.navigateByUrl('/apartmentDetails');
   }
 }

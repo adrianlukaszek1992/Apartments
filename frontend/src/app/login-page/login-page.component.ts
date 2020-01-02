@@ -31,7 +31,7 @@ export class LoginPageComponent implements OnInit {
       } else if (this.customerService.isOwner()) {
         this.router.navigateByUrl('/owner');
       } else {
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/user-reservations');
       }
     }
     this.loginForm = this.formBuilder.group({
