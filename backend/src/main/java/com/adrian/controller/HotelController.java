@@ -1,6 +1,7 @@
 package com.adrian.controller;
 
 import com.adrian.Services.CityService;
+import com.adrian.Services.HotelService;
 import com.adrian.Services.UserService;
 import com.adrian.mapper.ApartmentDetailsViewWrapper;
 import com.adrian.mapper.ApartmentsSearchResultViewWrapper;
@@ -37,6 +38,8 @@ public class HotelController {
     CityService cityService;
     @Autowired
     UserService userService;
+    @Autowired
+    HotelService hotelService;
 
     @GetMapping(value = "/search")
     public List<ApartmentsSearchResultViewWrapper> getHotels(@RequestParam String place, String hotelName, String startDate, String endDate) {
@@ -54,7 +57,8 @@ public class HotelController {
         } else {
             LocalDate startDateLD = LocalDate.parse(startDate);
             LocalDate endDateLD = LocalDate.parse(endDate);
-            apartments = apartmentRepository.getApartmentsByHotelName(hotelName);
+            int hotelId = hotelService.getNameToIdHotel().get(hotelName);
+            apartments = apartmentRepository.findApartmentsByHotelId(hotelId);
             List<Integer> resrvationIds = repositoryReservation.findAllIdApartmentFromAGivenDateRange(startDateLD, endDateLD);
             hotelEntities = hotelRepository.findHotelByHotelName(hotelName);
             List<ApartmentEntity> clonedApartments = new ArrayList(apartments);

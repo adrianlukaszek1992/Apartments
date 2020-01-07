@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {LoginResultModel} from './model/login-result-model';
 import {Observable} from 'rxjs';
 import {RegisterModel} from './model/register-model';
-import {CustomerService} from './customer.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +29,15 @@ export class ApiService {
 
   update(user: any): Observable<any> {
     return this.http.post(`${this.baseUrl}` + `/update`, user);
+  }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}` + `/getUsers`);
+  }
+
+  deleteUser(email: string): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('email', email);
+    return this.http.get<any>(`${this.baseUrl}` + `/delete`, {params});
   }
 }

@@ -1,3 +1,91 @@
-<p>
-  admin-page works!
-</p>
+<h5 class="card-title">Create new user</h5>
+<app-register-form [isModify]="false" [isAdmin]="true"></app-register-form>
+<h5 class="card-title">List of users</h5>
+<div>
+
+  <table class="table table-bordered">
+    <thead class="thead-light text-center">
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Last Name
+      </th>
+      <th>
+        Street
+      </th>
+      <th>
+        City
+      </th>
+      <th>
+        Email
+      </th>
+      <th>
+        Phone
+      </th>
+      <th>
+        Password
+      </th>
+      <th>
+        Profile
+      </th>
+      <th>
+        Edit User
+      </th>
+      <th>
+        Delete User
+      </th>
+    </tr>
+    </thead>
+    <tbody *ngIf="users">
+    <tr *ngFor="let row of users"
+    >
+      <td class="text-center">
+        {{row['name']}}
+      </td>
+      <td class="text-center">
+        {{row['lastname']}}
+      </td>
+      <td class="text-center">
+        {{row['street']}}
+      </td>
+      <td class="text-center">
+        {{row['city']}}
+      </td>
+      <td class="text-center">
+        {{row['email']}}
+      </td>
+      <td class="text-center">
+        {{row['phone']}}
+      </td>
+      <td class="text-center">
+        {{row['password']}}
+      </td>
+      <td class="text-center">
+        {{row['profile']}}
+      </td>
+      <td class="text-center">
+        <button class="btn fa fa-trash-o" (click)="editUser(content, row['email'])">Edit</button>
+      </td>
+      <td class="text-center">
+        <button class="btn fa fa-trash-o" (click)="deleteUser(row['email'])">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<ng-template #content let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Update user</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-register-form [isModify]="true" [isAdmin]="true" [email]="email"></app-register-form>
+    </div>
+  </div>
+</ng-template>

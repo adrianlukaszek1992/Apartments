@@ -15,6 +15,10 @@ import {ApiService} from '../api.service';
 export class RegisterFormComponent implements OnInit {
   @Input()
   isModify: boolean;
+  @Input()
+  isAdmin: boolean;
+  @Input()
+  email:  '';
   submitted = false;
   registerForm: FormGroup;
   error: any;
@@ -33,28 +37,34 @@ export class RegisterFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.isModify) {
-      this.submitButtonText = 'Modify the user';
+    this.submitButtonText = this.isModify
+      ? 'Modify the user'
+      : this.submitButtonText;
+    let email = this.customerService.getCurrentEmail();
+    if (this.isAdmin && !this.isModify) {
+      email = '';
+    } else if (this.isAdmin && this.isModify) {
+      email = this.email;
     }
-    this.registerForm = BuildRegsitrationForm(this.isModify, this.customerService.getCurrentEmail());
+    this.registerForm = BuildRegsitrationForm(this.isModify, email);
+
   }
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.registerForm.invalid);
+    console.log(this.registerForm);
     if (this.registerForm.invalid) {
       return;
     }
-    if (this.isModify) {
-      this.tryUpdate();
-    } else {
-      this.tryRegister();
-    }
+    this.isModify
+      ? this.tryUpdate()
+      : this.tryRegister();
   }
 
   tryUpdate() {
     this.registerModel = new RegisterModel(this.registerForm.value);
     delete this.registerModel['confirmPassword'];
+    this.registerModel['email'] = this.email;
     this.apiService.update(
       this.registerModel
     ).subscribe(
@@ -67,7 +77,6 @@ export class RegisterFormComponent implements OnInit {
       },
       res => {
         this.error = res.error.error;
-        console.log(res);
       });
   }
 
@@ -80,7 +89,7 @@ export class RegisterFormComponent implements OnInit {
       res => {
         if (res.error) {
           this.error = res.error;
-        } else {
+        } else if (!this.isAdmin) {
           Redirect(res, this.router, this.customerService, this.registerForm.controls.email.value);
         }
       },
