@@ -1,11 +1,16 @@
 package com.adrian.controller;
 
+import com.adrian.Services.CityService;
+import com.adrian.mapper.UserEntityViewWrapper;
 import com.adrian.model.UserEntity;
 import com.adrian.repo.CityRepository;
 import com.adrian.repo.UserRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/authentication")
@@ -16,13 +21,15 @@ public class AuthenticationController {
     UserRepository repository;
     @Autowired
     CityRepository repositoryCity;
+    @Autowired
+    CityService cityService;
 
     @GetMapping(value = "/login")
-    public String loginIn(@RequestParam String email, String password){
-    System.out.println(email);
+    public String loginIn(@RequestParam String email, String password) {
+        System.out.println(email);
 
         System.out.println(password);
-        if(repository.findProfileByPasswordAndEmail(password, email).size() == 0){
+        if (repository.findProfileByPasswordAndEmail(password, email).size() == 0) {
             return new JSONObject()
                     .put("error", "wrong user name or password")
                     .toString();
@@ -31,9 +38,10 @@ public class AuthenticationController {
                 .put("profile", repository.findProfileByPasswordAndEmail(password, email).get(0))
                 .toString();
     }
+
     @PostMapping(value = "/create")
     public String postUser(@RequestBody UserEntity user) {
-        if(repository.findUserByEmail(user.getEmail()).size() != 0){
+        if (repository.findUserByEmail(user.getEmail()).size() != 0) {
             return new JSONObject()
                     .put("error", "Email already exists in the system")
                     .toString();
@@ -42,7 +50,7 @@ public class AuthenticationController {
         int cityId = repositoryCity.findCityIdByCityName(cityName).get(0);
 
         UserEntity _user = repository.save(new UserEntity(user.getName(), user.getLastname(),
-                user.getEmail(), user.getPassword(), user.getPhone(), user.getStreet(), user.getProfile(),  cityId, 1));
+                user.getEmail(), user.getPassword(), user.getPhone(), user.getStreet(), user.getProfile(), cityId, 1));
 
 
         return new JSONObject()
@@ -65,7 +73,28 @@ public class AuthenticationController {
         _user.setProfile(user.getProfile());
         repository.save(_user);
         return new JSONObject()
-                .put("message", "Data was saved succesfully")
+                .put("message", "Data was saved successfully")
+                .toString();
+    }
+
+    @GetMapping(value = "/getUsers")
+    public List<UserEntityViewWrapper> getUsers() {
+        List<UserEntity> users=repository.findAllUsers();
+        List<UserEntityViewWrapper> result = new ArrayList<>();
+        users.forEach(user ->{
+            String city = cityService.getIdToNameCity().get(user.getIdCity());
+            result.add(new UserEntityViewWrapper(user.getName(), user.getLastname(), user.getEmail(), user.getPassword(), user.getPhone(), user.getStreet(), user.getProfile(), city, user.getEnabled()));
+        });
+        return result;
+    }
+
+    @GetMapping(value = "/delete")
+    public String deleteUser(@RequestParam String email) {
+        List<UserEntity> users=repository.findUserByEmail(email);
+        UserEntity user = users.get(0);
+        repository.delete(user);
+        return new JSONObject()
+                .put("message", "User was deleted successfully")
                 .toString();
     }
 }

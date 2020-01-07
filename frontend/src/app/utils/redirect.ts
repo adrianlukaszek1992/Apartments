@@ -8,10 +8,10 @@ export function Redirect(res: any, router: Router, customerService: CustomerServ
   } else if (res.profile === 'admin') {
     path = '/admin';
   } else if (res.profile) {
-    path = '/dashboard';
+    path = '/user-reservations';
   }
-    customerService.setCurrentEmail(currentEmail);
-    customerService.setCurrentProfile(res.profile);
-    router.navigateByUrl(path);
-    window.location.reload();
+  customerService.setCurrentEmail(currentEmail);
+  customerService.setCurrentProfile(res.profile);
+  router.navigateByUrl(path);
+  window.location.reload();
 }

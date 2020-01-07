@@ -16,7 +16,13 @@ export class RegisterPageComponent implements OnInit {
 
   ngOnInit() {
     if (this.customerService.isLogged()) {
-      this.router.navigateByUrl('/dashboard');
+      if (this.customerService.isAdmin()) {
+        this.router.navigateByUrl('/admin');
+      } else if (this.customerService.isOwner()) {
+        this.router.navigateByUrl('/owner');
+      } else {
+        this.router.navigateByUrl('/user-reservations');
+      }
     }
   }
 }
